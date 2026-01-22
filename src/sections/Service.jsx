@@ -116,16 +116,7 @@ const ServicesGallery = () => {
 
       {/* BOTTOM DECORATION – DESKTOP ONLY */}
       <section className="hidden md:flex gap-4 justify-center py-12">
-        {[1, 2, 3].map((i) => (
-          <motion.img
-            key={i}
-            whileHover={{ y: -20 }}
-            src={puzzle}
-            alt="Decoration"
-            className="h-20 rounded-xl"
-          />
-        ))}
-      </section>
+      
       <section className="flex gap-4 mx-auto justify-center bg-[#183A3B]">
       <motion.img whileHover={{y:-20}} src={puzzle} alt="About Us Image" className=" rounded-xl  h-20 "/>
           <motion.img whileHover={{y:-20}} src={puzzle} alt="About Us Image" className="rounded-xl  h-20 "/>
