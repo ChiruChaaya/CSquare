@@ -115,8 +115,7 @@ const ServicesGallery = () => {
       </div>
 
       {/* BOTTOM DECORATION – DESKTOP ONLY */}
-      <section className="hidden md:flex gap-4 justify-center py-12">
-      
+     
       <section className="flex gap-4 mx-auto justify-center bg-[#183A3B]">
       <motion.img whileHover={{y:-20}} src={puzzle} alt="About Us Image" className=" rounded-xl  h-20 "/>
           <motion.img whileHover={{y:-20}} src={puzzle} alt="About Us Image" className="rounded-xl  h-20 "/>
