@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion, useScroll, useTransform } from "framer-motion";
+import puzzle from "../assets/images/puzzle.png";
 
 const Puzzle = ({inView}) => {
     const inviewed=inView;
@@ -11,7 +12,7 @@ const Puzzle = ({inView}) => {
     duration:0.8,
     ease:"easeInOut"
    }}
-   src="src/assets/images/Puzzle_icon_in_iOS_Style-removebg-preview.png" alt="About Us Image" className="  rounded-xl h-50 top-1.5 z-20"/>
+   src={puzzle} alt="About Us Image" className="  rounded-xl h-50 top-1.5 z-20"/>
 
    <motion.img  
    animate={{x:inviewed?50:0,
@@ -21,7 +22,7 @@ const Puzzle = ({inView}) => {
     duration:0.8,
     ease:"easeInOut"
    }}
-   src="src/assets/images/Puzzle_icon_in_iOS_Style-removebg-preview.png" alt="About Us Image" className="rounded-xl  h-50 z-20"/>
+   src={puzzle} alt="About Us Image" className="rounded-xl  h-50 z-20"/>
     </main>
   )
 }

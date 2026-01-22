@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import puzzle from "../assets/images/puzzle.png";
 import { services } from '../Data/ourservices.js';
 
 
@@ -133,9 +134,9 @@ const ServicesGallery = () => {
 
       </div>
        <section className="flex gap-4 mx-auto justify-center bg-[#183A3B]">
-    <motion.img whileHover={{y:-20}} src="../assets/images/Puzzle_icon_in_iOS_Style-removebg-preview.png" alt="About Us Image" className=" rounded-xl  h-20 "/>
-    <motion.img whileHover={{y:-20}} src="../assets/images/Puzzle_icon_in_iOS_Style-removebg-preview.png" alt="About Us Image" className="rounded-xl  h-20 "/>
-    <motion.img whileHover={{y:-20}} src="../assets/images/Puzzle_icon_in_iOS_Style-removebg-preview.png" alt="About Us Image" className=" rounded-xl  h-20 "/>
+    <motion.img whileHover={{y:-20}} src={puzzle} alt="About Us Image" className=" rounded-xl  h-20 "/>
+    <motion.img whileHover={{y:-20}} src={puzzle} alt="About Us Image" className="rounded-xl  h-20 "/>
+    <motion.img whileHover={{y:-20}} src={puzzle} alt="About Us Image" className=" rounded-xl  h-20 "/>
     </section>
 
     </div>
