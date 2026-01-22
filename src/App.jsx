@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import SplashScreen from 'D:/CSqaure/src/compenents/splash.jsx'; // Import the file
+import SplashScreen from './compenents/splash.jsx'; // Import the file
 import ContactSection from './sections/Contact';
 import PricingSection from './sections/Prices';
 import Hero from './sections/Home';
