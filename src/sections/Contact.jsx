@@ -75,7 +75,7 @@ const ContactSection = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col justify-center h-full space-y-8"
+          className="flex flex-col justify-center -mt-15 h-full space-y-8"
         >
           <div>
             <span className="text-emerald-400 font-mono text-xs tracking-widest uppercase">
@@ -113,7 +113,7 @@ const ContactSection = () => {
                 ><path strokeLinecap="round" strokeLinejoin="round" d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01M7.5 3h9a4.5 4.5 0 014.5 4.5v9a4.5 4.5 0 01-4.5 4.5h-9A4.5 4.5 0 013 16.5v-9A4.5 4.5 0 017.5 3z" />
                 </svg>
               </div>
-              <span>(+91) 7975222177 / 7338604106</span>
+              <span>_hellocsquare_</span>
             </div>
           </div>
         </motion.div>
@@ -124,7 +124,7 @@ const ContactSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{  }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-neutral-900/60 backdrop-blur-md border border-white/10 p-8 md:p-10 rounded-3xl shadow-2xl"
+          className="bg-neutral-900/60 backdrop-blur-md border border-white/10 p-6 md:p-10 rounded-3xl shadow-2xl"
         >
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
             
