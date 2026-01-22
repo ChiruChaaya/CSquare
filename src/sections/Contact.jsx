@@ -63,9 +63,9 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="relative w-full min-h-screen  flex items-center justify-center py-20 px-4 md:px-10 overflow-hidden">
+    <section id="contact" className="relative w-full min-h-screen  flex items-center justify-center py-20 px-4 md:px-10 overflow-hidden">
       
-      <div className="absolute inset-0 bg-[#183A3B]/40 pointer-events-none" />
+      <div className="absolute inset-0 bg-[#183A3B] pointer-events-none" />
 
       <div className="relative z-10 w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
         
@@ -124,7 +124,7 @@ const ContactSection = () => {
                 value={form.name}
                 onChange={handleChange}
                 required
-                placeholder="John Doe"
+                placeholder="Name"
                 className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors placeholder:text-neutral-600"
               />
             </div>
@@ -138,7 +138,7 @@ const ContactSection = () => {
                 value={form.email}
                 onChange={handleChange}
                 required
-                placeholder="john@example.com"
+                placeholder="Mail"
                 className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors placeholder:text-neutral-600"
               />
             </div>
@@ -151,7 +151,7 @@ const ContactSection = () => {
                 name="phone"
                 value={form.phone}
                 onChange={handleChange}
-                placeholder="+1 (555) 000-0000"
+                placeholder="000000000"
                 className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors placeholder:text-neutral-600"
               />
             </div>
