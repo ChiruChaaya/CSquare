@@ -13,7 +13,7 @@ export default function About() {
   const scale = useTransform(scrollYProgress, [0, 1], [0.5, 1]);
   return (
     <>
-    <section className="bg-[#183A3B]">
+    <section className="bg-[#183A3B] min-h-screen">
     <section className="flex gap-4 mx-auto justify-center bg-[#183A3B]">
     <motion.img whileHover={{y:-20}} src={puzzle} alt="About Us Image" className="mt-12 rounded-xl  h-20 "/>
     <motion.img whileHover={{y:-20}} src={puzzle}alt="About Us Image" className=" mt-12 rounded-xl  h-20 "/>
@@ -40,7 +40,7 @@ At CSquare, every project is more than just work,  it’s a chance to bring crea
 We believe the best work comes when you truly enjoy what you do. That’s why we put<span className="text-emerald-500"> our heart, energy, and full effort</span> into every collaboration, and why your <span className="text-emerald-500">support </span>means so much to us.
 You can find more details in the following pages. This website is updated regularly, and we’re always happy to answer any questions you may have.</motion.p>
    </motion.section>
-   <Puzzle inView={inviewed}/>
+  {/*//<Puzzle inView={inviewed}/>*/}
     <section className="flex gap-4 mx-auto justify-center bg-[#183A3B]">
     <motion.img whileHover={{y:-20}} src={puzzle} alt="About Us Image" className=" rounded-xl  h-20 "/>
     <motion.img whileHover={{y:-20}} src={puzzle} alt="About Us Image" className="rounded-xl  h-20 "/>
