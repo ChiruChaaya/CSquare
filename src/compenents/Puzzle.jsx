@@ -11,17 +11,17 @@ const Puzzle = ({inView}) => {
     duration:0.8,
     ease:"easeInOut"
    }}
-   src="public/images/Puzzle_icon_in_iOS_Style-removebg-preview.png" alt="About Us Image" className="  rounded-xl h-50 top-1.5 z-20"/>
+   src="src/assets/images/Puzzle_icon_in_iOS_Style-removebg-preview.png" alt="About Us Image" className="  rounded-xl h-50 top-1.5 z-20"/>
 
    <motion.img  
    animate={{x:inviewed?50:0,
-            scale:inviewed?1:0.5
+            scale:inviewed?1:0.5  
    }}
    transition={{
     duration:0.8,
     ease:"easeInOut"
    }}
-   src="public/images/Puzzle_icon_in_iOS_Style-removebg-preview.png" alt="About Us Image" className="rounded-xl  h-50 z-20"/>
+   src="src/assets/images/Puzzle_icon_in_iOS_Style-removebg-preview.png" alt="About Us Image" className="rounded-xl  h-50 z-20"/>
     </main>
   )
 }

@@ -13,9 +13,9 @@ export default function About() {
   return (
     <>
     <section className="flex gap-4 mx-auto justify-center">
-    <motion.img whileHover={{y:-20}} src="public/images/Puzzle_icon_in_iOS_Style-removebg-preview.png" alt="About Us Image" className="mt-12 rounded-xl  h-20 "/>
-    <motion.img whileHover={{y:-20}} src="public/images/Puzzle_icon_in_iOS_Style-removebg-preview.png" alt="About Us Image" className=" mt-12 rounded-xl  h-20 "/>
-    <motion.img whileHover={{y:-20}} src="public/images/Puzzle_icon_in_iOS_Style-removebg-preview.png" alt="About Us Image" className="mt-12 rounded-xl  h-20 "/>
+    <motion.img whileHover={{y:-20}} src="src/assets/images/Puzzle_icon_in_iOS_Style-removebg-preview.png" alt="About Us Image" className="mt-12 rounded-xl  h-20 "/>
+    <motion.img whileHover={{y:-20}} src="src/assets/images/Puzzle_icon_in_iOS_Style-removebg-preview.png" alt="About Us Image" className=" mt-12 rounded-xl  h-20 "/>
+    <motion.img whileHover={{y:-20}} src="src/assets/images/Puzzle_icon_in_iOS_Style-removebg-preview.png" alt="About Us Image" className="mt-12 rounded-xl  h-20 "/>
     </section>
     <motion.section
     ref={ref}
