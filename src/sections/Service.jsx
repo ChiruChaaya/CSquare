@@ -28,7 +28,7 @@ const ServicesGallery = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div id="services" className="flex flex-col h-screen w-full  bg-[#183A3B]/30 text-white overflow-hidden scroll-mt-15">
+    <div id="services" className="flex flex-col h-screen w-full  bg-[#183A3B] text-white overflow-hidden scroll-mt-15">
       
       {/* HEADER: FIXED ANIMATION */}
       <motion.header 

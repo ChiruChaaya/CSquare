@@ -38,8 +38,8 @@ const ContactSection = () => {
 
     // 2. UPDATED SEND FUNCTION: Added 'phone_number'
     emailjs.send(
-      'service_2ojb2qa',     // Replace with actual ID
-      'template_eo9aczo',    // Replace with actual ID
+      'service_2ojb2qa',     
+      'template_eo9aczo',    
       {
         from_name: form.name,
         from_email: form.email,
@@ -48,7 +48,7 @@ const ContactSection = () => {
         message: form.message,
         to_name: "Owner"
       },
-      'x-nQVUSY3El8HMWK1'      // Replace with actual Key
+      'x-nQVUSY3El8HMWK1'      
     )
     .then(() => {
       setLoading(false);
@@ -63,7 +63,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="relative w-full min-h-screen bg-neutral-950 flex items-center justify-center py-20 px-4 md:px-10 overflow-hidden">
+    <section className="relative w-full min-h-screen  flex items-center justify-center py-20 px-4 md:px-10 overflow-hidden">
       
       <div className="absolute inset-0 bg-[#183A3B]/40 pointer-events-none" />
 
@@ -73,7 +73,7 @@ const ContactSection = () => {
         <motion.div 
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
+          viewport={{ }}
           transition={{ duration: 0.6 }}
           className="flex flex-col justify-center h-full space-y-8"
         >
@@ -94,13 +94,13 @@ const ContactSection = () => {
               <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
               </div>
-              <span>hello@yourbrand.com</span>
+              <span>csquaredigital2026@gmail.com</span>
             </div>
             <div className="flex items-center gap-4 text-white/80">
               <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
               </div>
-              <span>+1 (555) 123-4567</span>
+              <span>(+91) 7975222177 / 7338604106</span>
             </div>
           </div>
         </motion.div>
@@ -109,7 +109,7 @@ const ContactSection = () => {
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{  }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="bg-neutral-900/60 backdrop-blur-md border border-white/10 p-8 md:p-10 rounded-3xl shadow-2xl"
         >

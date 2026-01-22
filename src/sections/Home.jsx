@@ -19,7 +19,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-5xl font-extrabold leading-tight">
+          className="text-5xl font-serif font-extrabold leading-tight">
           We Build Powerful Digital Experiences That Grow Your Business
         </motion.h1>
 
@@ -28,7 +28,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-6 text-lg text-slate-300"
+          className="mt-6 text-lg font-sans text-slate-300"
         >
           From stunning websites to strategic digital marketing, we help brands
           stand out and scale online with results that matter.

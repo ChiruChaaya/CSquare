@@ -92,7 +92,7 @@ const PricingSection = () => {
 
       {/* --- BACKGROUND COLOR CHANGE HERE --- */}
       {/* Changed color to #183A3B and opacity to /50 for a richer, darker look */}
-      <div className="absolute inset-0 bg-[#183A3B]/50 pointer-events-none" />
+      <div className="absolute inset-0 bg-[#183A3B] pointer-events-none" />
 
       <motion.div 
         variants={sectionVariants}
@@ -117,7 +117,7 @@ const PricingSection = () => {
           variants={fadeUpVariants}
           className="flex justify-start md:justify-center overflow-x-auto pb-8 mb-4 scrollbar-hide px-4"
         >
-          <div className="flex space-x-2 bg-neutral-900/50 p-1 rounded-full border border-white/10 backdrop-blur-sm">
+          <div className="flex space-x-2 bg-[#4b6455]/80 p-1 rounded-full border border-white/10 backdrop-blur-sm">
             {pricingCategories.map((cat) => (
               <button
                 key={cat.id}
@@ -129,7 +129,7 @@ const PricingSection = () => {
                 {activeCategory.id === cat.id && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute inset-0 bg-[#4b6455]/80 rounded-full"
+                    className="absolute inset-0 bg-[#183A3B] rounded-full"
                     transition={{ type: "spring", stiffness: 500, damping: 30 }}
                   />
                 )}
