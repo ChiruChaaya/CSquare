@@ -30,14 +30,14 @@ export default function About() {
         <motion.h2
         initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }} className="text-9xl  font-serif font-bold text-center mb-8">About Us</motion.h2>
+          transition={{ duration: 0.9 }} className="text-7xl  font-serif font-bold text-center mb-8">About Us</motion.h2>
         <motion.p
         initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }} className="text-center bg-[#183A3B] font-sans text-2xl">We are two partners driven by a shared passion for creating thoughtful, affordable designs, crafted to reflect each client’s unique style and needs, especially for small creators and businesses. We believe in collaboration and growing together with those we work with.
-At CSquare, every project is more than just work,  it’s a chance to bring creativity and life to everything we do. This is not just a business for us; it’s a passion project and a dream we are building.
-We believe the best work comes when you truly enjoy what you do. That’s why we put our heart, energy, and full effort into every collaboration, and why your support means so much to us.
-You can find more details in the following pages. This brochure is updated regularly, and we’re always happy to answer any questions you may have.</motion.p>
+          transition={{ duration: 0.8 }} className="text-center bg-[#183A3B] font-sans text-2xl">We are <span className="text-emerald-500">two partners </span>driven by a shared passion for <span className="text-emerald-500">creating thoughtful, affordable designs</span>, crafted to reflect each client’s <span className="text-emerald-500">unique style</span> and needs, especially for <span className="text-emerald-500">small creators and businesses</span>. We believe in collaboration and <span className="text-emerald-500">growing together</span> with those we work with.
+At CSquare, every project is more than just work,  it’s a chance to bring creativity and life to everything we do. This is not just a business for us; it’s a <span className="text-emerald-500">passion project and a dream we are building</span>.
+We believe the best work comes when you truly enjoy what you do. That’s why we put<span className="text-emerald-500"> our heart, energy, and full effort</span> into every collaboration, and why your <span className="text-emerald-500">support </span>means so much to us.
+You can find more details in the following pages. This website is updated regularly, and we’re always happy to answer any questions you may have.</motion.p>
    </motion.section>
    <Puzzle inView={inviewed}/>
     <section className="flex gap-4 mx-auto justify-center bg-[#183A3B]">
