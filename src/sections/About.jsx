@@ -1,5 +1,5 @@
 import { motion,px,useInView,useScroll,useTransform } from "framer-motion";
-import puzzle from "../assets/images/Puzzle_icon_in_iOS_Style-removebg-preview.png";
+import puzzle from "..assets/images/puzzle.png";
 import { useRef } from "react";
 import Puzzle from "../compenents/Puzzle";
 export default function About() {
