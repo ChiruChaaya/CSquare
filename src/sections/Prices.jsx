@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { pricingCategories } from '../Data/ourservices';
+import { pricingCategories } from 'src/Data/ourservices.js';
 
 // --- CSS TO HIDE SCROLLBARS ---
 const hideScrollbarStyle = `
