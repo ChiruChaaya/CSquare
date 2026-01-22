@@ -1,5 +1,5 @@
 import { motion,px,useInView,useScroll,useTransform } from "framer-motion";
-import puzzle from "..assets/images/puzzle.png";
+import puzzle from "..assets/puzzle.png";
 import { useRef } from "react";
 import Puzzle from "../compenents/Puzzle";
 export default function About() {
