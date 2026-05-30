@@ -2,9 +2,10 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
+    <div className="mt-0 lg:-mt-30 -mb-35">
     <section
       id="home"
-      className="min-h-screen px-4 sm:px-8 py-10 sm:py-15 scroll-mt-24 bg-gradient-to-b from-[#183A3B] to-[#183a3a] flex flex-col-reverse md:flex-row items-center justify-center gap-8 md:gap-16"
+      className="px-4 sm:px-8 py-5 mt- sm:py-15 scroll-mt-24 bg-gradient-to-b from-[#183A3B] to-[#183a3a] flex flex-col-reverse md:flex-row items-center justify-center gap-8 md:gap-16"
     >
       {/* Hero Image */}
       <motion.div
@@ -15,9 +16,9 @@ export default function Hero() {
         className="w-full md:w-1/2 flex justify-center"
       >
         <img
-          src="/WhatsApp Image 2026-01-19 at 7.23.10 PM.jpeg"
+          src="public/csquarelogo.png"
           alt="Hero"
-          className="w-full max-w-md md:max-w-lg rounded-xl shadow-2xl object-cover"
+          className="w-full max-w-md md:max-w-lg rounded-xl object-cover"
         />
       </motion.div>
 
@@ -67,5 +68,7 @@ export default function Hero() {
         </motion.div>
       </div>
     </section>
+    </div>
   );
 }
+

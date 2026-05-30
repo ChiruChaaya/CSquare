@@ -10,7 +10,7 @@ export default function About() {
     offset:["start end","center start"]
   });
   
-  const scale = useTransform(scrollYProgress, [0, 1], [0.5, 1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.7, 1]);
   return (
     <>
     <section className="bg-[#183A3B] min-h-screen">
@@ -35,7 +35,7 @@ export default function About() {
         <motion.p
         initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }} className="text-center bg-[#183A3B] font-sans text-2xl">We are <span className="text-emerald-500">two partners </span>driven by a shared passion for <span className="text-emerald-500">creating thoughtful, affordable designs</span>, crafted to reflect each client’s <span className="text-emerald-500">unique style</span> and needs, especially for <span className="text-emerald-500">small creators and businesses</span>. We believe in collaboration and <span className="text-emerald-500">growing together</span> with those we work with.
+          transition={{ duration: 0.4 }} className="text-center bg-[#183A3B] font-sans text-2xl">We are <span className="text-emerald-500">two partners </span>driven by a shared passion for <span className="text-emerald-500">creating thoughtful, affordable designs</span>, crafted to reflect each client’s <span className="text-emerald-500">unique style</span> and needs, especially for <span className="text-emerald-500">small creators and businesses</span>. We believe in collaboration and <span className="text-emerald-500">growing together</span> with those we work with.
 At CSquare, every project is more than just work,  it’s a chance to bring creativity and life to everything we do. This is not just a business for us; it’s a <span className="text-emerald-500">passion project and a dream we are building</span>.
 We believe the best work comes when you truly enjoy what you do. That’s why we put<span className="text-emerald-500"> our heart, energy, and full effort</span> into every collaboration, and why your <span className="text-emerald-500">support </span>means so much to us.
 You can find more details in the following pages. This website is updated regularly, and we’re always happy to answer any questions you may have.</motion.p>

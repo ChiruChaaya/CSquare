@@ -4,7 +4,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#4b6455]/80 backdrop-blur px-5 md:px-8 py-4 flex items-center justify-between">
+    <nav className="sticky top-0 z-50 bg-[#4b6455]/80 backdrop-blur px-2 md:px-8 py-4 flex items-center justify-between">
       
       {/* Logo */}
       <h1 className="font-bold font-serif text-xl md:text-2xl">

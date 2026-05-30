@@ -62,11 +62,11 @@ const PricingSection = () => {
 
   return (
     <>
-      <section id='pricing' className="relative w-full py-20 overflow-x-hidden min-h-screen flex flex-col justify-center">
+      <section id='pricing' className="relative w-full py-20 overflow-x-hidden min-h-screen flex flex-col justify-center ">
         <style>{hideScrollbarStyle}</style>
 
         {/* Background */}
-        <div className="absolute inset-0 bg-[#183A3B] pointer-events-none" />
+        <div className="absolute inset-0 bg-[#183A3B] pointer-events-none " />
 
         <motion.div
           variants={sectionVariants}

@@ -7,6 +7,7 @@ import Hero from './sections/Home';
 import Navbar from './compenents/Navbar';
 import About from './sections/About';
 import ServicesGallery from './sections/Service';
+import ComboPacks from './sections/ComboPacks.jsx';
 
 // Import your other sections
 
@@ -32,6 +33,7 @@ function App() {
       <About/>
       <ServicesGallery/>
       <PricingSection/>
+       <ComboPacks/>
       <ContactSection/>
         </main>
       )}
