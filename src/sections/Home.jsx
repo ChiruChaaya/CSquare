@@ -16,7 +16,7 @@ export default function Hero() {
         className="w-full md:w-1/2 flex justify-center"
       >
         <img
-          src="public/csquarelogo.png"
+          src="/csquarelogo.png"
           alt="Hero"
           className="w-full max-w-md md:max-w-lg rounded-xl object-cover"
         />
