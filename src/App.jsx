@@ -8,6 +8,7 @@ import Navbar from './compenents/Navbar';
 import About from './sections/About';
 import ServicesGallery from './sections/Service';
 import ComboPacks from './sections/ComboPacks.jsx';
+import MusicPlayer from "./compenents/MusicPlayer";
 
 // Import your other sections
 
@@ -16,7 +17,11 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
+    
     <div className="bg-neutral-950 min-h-screen text-white">
+      <audio id="background-music" loop>
+        <source src="/music/background.mp3" type="audio/mpeg" />
+      </audio>
       
       {/* AnimatePresence allows the Splash to animate OUT when removed */}
       <AnimatePresence mode="wait">
@@ -28,13 +33,15 @@ function App() {
       {/* ONLY SHOW WEBSITE AFTER LOADING */}
       {!isLoading && (
         <main>
-           <Navbar />
-      <Hero />
-      <About/>
-      <ServicesGallery/>
-      <PricingSection/>
-       <ComboPacks/>
-      <ContactSection/>
+          <MusicPlayer/>
+          <Navbar />
+          <Hero />
+          <About/>
+          <ServicesGallery/>
+          <PricingSection/>
+          <ComboPacks/>
+          <ContactSection/>
+      
         </main>
       )}
 

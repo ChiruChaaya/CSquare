@@ -20,14 +20,6 @@ const SplashScreen = ({ onComplete }) => {
   }, []);
 
   // When progress hits 100, trigger the onComplete callback after a delay
-  useEffect(() => {
-    if (progress === 100) {
-      const timeout = setTimeout(() => {
-        onComplete();
-      }, 800); // Wait 0.8s at 100% before closing
-      return () => clearTimeout(timeout);
-    }
-  }, [progress, onComplete]);
 
   return (
     <motion.div
@@ -66,6 +58,38 @@ const SplashScreen = ({ onComplete }) => {
         <div className="mt-4 font-mono text-xs text-neutral-500">
           {progress}%
         </div>
+
+        {progress === 100 && (
+  <motion.button
+    initial={{ opacity: 0, y: 15 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    onClick={() => {
+      const music = document.getElementById("background-music");
+
+      if (music) {
+        music.play();
+      }
+
+      onComplete();
+    }}
+    className="
+      mt-6
+      px-8
+      py-3
+      bg-emerald-500
+      hover:bg-emerald-600
+      text-white
+      rounded-xl
+      font-semibold
+      shadow-lg
+      transition-all
+      duration-300
+    "
+  >
+    Get In
+  </motion.button>
+)}
       
       </div>
     </motion.div>
