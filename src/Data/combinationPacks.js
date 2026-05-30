@@ -8,7 +8,7 @@ export const combinationPacks = [
     originalPrice: '₹25,000',
     discountedPrice: '₹17,999',
     savings: 'Save 28%',
-    badge: null,
+    badge: 'STARTER',
     services: [
       'Single Page Website',
       'Basic SEO Setup',

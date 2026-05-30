@@ -168,16 +168,17 @@ const ComboPacks = () => {
                 </div>
 
                 {/* CTA Button */}
-                <motion.button
+                <motion.a
+                  href="#contact"
                   whileTap={{ scale: 0.97 }}
-                  className={`w-full py-3 rounded-lg font-medium transition-all duration-300 ${
-                    pack.badge
-                      ? 'bg-emerald-500 text-white hover:bg-emerald-400 shadow-lg shadow-emerald-500/30'
-                      : 'bg-white/5 border border-white/10 text-white hover:bg-emerald-600 hover:border-emerald-600'
-                  }`}
-                >
-                  Get This Pack
-                </motion.button>
+                  className={`w-full py-3 rounded-lg font-medium transition-all duration-300 text-center block cursor-pointer ${
+                  pack.badge
+                    ? "bg-emerald-500 text-white hover:bg-emerald-400 shadow-lg shadow-emerald-500/30"
+                    : "bg-white/5 border border-white/10 text-white hover:bg-emerald-600 hover:border-emerald-600"
+                }`}
+              >
+                Get This Pack
+              </motion.a>
               </motion.div>
             ))}
           </motion.div>
