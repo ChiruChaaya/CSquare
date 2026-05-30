@@ -60,108 +60,206 @@ export const pricingCategories = [
     plans: [
       {
         name: "Starter",
-        price: "$299",
-        features: ["12 Posts / Month", "Hashtag Strategy", "Monthly Report", "Community Management"]
+        price: "₹7,999",
+        features: [
+          "12 Posts / Month",
+          "Hashtag Strategy",
+          "Monthly Report",
+          "Community Management"
+        ]
       },
       {
         name: "Growth",
-        price: "$599",
-        features: ["20 Posts / Month", "Reels & Stories", "Ad Management", "Bi-Weekly Meetings", "Content Calendar"]
+        price: "₹14,999",
+        features: [
+          "20 Posts / Month",
+          "Reels & Stories",
+          "Basic Ad Support",
+          "Bi-Weekly Meetings",
+          "Content Calendar"
+        ]
       },
       {
         name: "Pro",
-        price: "$999",
-        features: ["Daily Content", "Full Video Production", "Dedicated Manager", "24/7 Support", "Influencer Outreach"]
-      },
-      {
-        name: "E-Commerce",
-        price: "$2,499",
-        features: ["Online Store", "Payment Gateway", "Product Management", "User Accounts", "Advanced SEO"]
+        price: "₹24,999",
+        features: [
+          "Daily Content",
+          "Advanced Reels",
+          "Dedicated Manager",
+          "Priority Support",
+          "Influencer Collaboration"
+        ]
       }
     ]
   },
+
   {
     id: "website",
     label: "Website Creation",
     plans: [
       {
         name: "Landing Page",
-        price: "$499",
-        features: ["One Page Design", "Mobile Responsive", "Contact Form", "Basic SEO"]
+        price: "₹9,999",
+        features: [
+          "One Page Design",
+          "Mobile Responsive",
+          "Contact Form",
+          "Basic SEO"
+        ]
       },
       {
         name: "Business Site",
-        price: "$1,299",
-        features: ["5-7 Pages", "CMS Integration", "Blog Setup", "Speed Optimization", "Analytics Setup"]
+        price: "₹24,999",
+        features: [
+          "5-7 Pages",
+          "CMS Integration",
+          "Blog Setup",
+          "Speed Optimization",
+          "Analytics Setup"
+        ]
       },
       {
         name: "E-Commerce",
-        price: "$2,499",
-        features: ["Online Store", "Payment Gateway", "Product Management", "User Accounts", "Advanced SEO"]
+        price: "₹49,999",
+        features: [
+          "Online Store",
+          "Payment Gateway",
+          "Product Management",
+          "User Accounts",
+          "Advanced SEO"
+        ]
       }
     ]
   },
+
   {
     id: "video",
     label: "Video Editing",
     plans: [
       {
         name: "Reels Pack",
-        price: "$300",
-        features: ["10 Short Form Videos", "Trending Audio", "Captions & Emojis"]
+        price: "₹4,999",
+        features: [
+          "10 Short Form Videos",
+          "Trending Audio",
+          "Captions & Effects"
+        ]
       },
       {
         name: "YouTuber",
-        price: "$800",
-        features: ["4 Long Form Videos", "Thumbnail Design", "Sound Design", "2 Revisions"]
+        price: "₹11,999",
+        features: [
+          "4 Long Form Videos",
+          "Thumbnail Design",
+          "Sound Design",
+          "2 Revisions"
+        ]
       }
     ]
   },
+
   {
     id: "shoot",
     label: "Ad & Video Shoot",
     plans: [
       {
         name: "Half Day",
-        price: "$1,500",
-        features: ["4 Hours Shoot", "1 Videographer", "Basic Lighting", "1 Location"]
+        price: "₹14,999",
+        features: [
+          "4 Hours Shoot",
+          "1 Videographer",
+          "Basic Lighting",
+          "1 Location"
+        ]
       },
       {
         name: "Full Production",
-        price: "$3,500",
-        features: ["8 Hours Shoot", "Full Crew", "Cinema Cameras", "Script Assistance", "Director on Set"]
+        price: "₹34,999",
+        features: [
+          "8 Hours Shoot",
+          "Professional Crew",
+          "Cinema Cameras",
+          "Script Assistance",
+          "Director Support"
+        ]
       }
     ]
   },
+
   {
-    id: "brochure",
-    label: "Brochure Design",
+    id: "ads",
+    label: "Running Ads",
     plans: [
       {
-        name: "Bi-Fold",
-        price: "$150",
-        features: ["4 Sides Design", "Print Ready PDF", "Stock Photos", "2 Revisions"]
+        name: "Starter",
+        price: "₹7,999",
+        features: [
+          "1 Ad Platform",
+          "Campaign Setup",
+          "Audience Targeting",
+          "Monthly Report"
+        ]
       },
       {
-        name: "Catalog",
-        price: "$450",
-        features: ["Up to 12 Pages", "Custom Icons", "Copy Editing", "Source Files"]
+        name: "Growth",
+        price: "₹14,999",
+        features: [
+          "Google & Meta Ads",
+          "Lead Generation Campaigns",
+          "A/B Testing",
+          "Bi-Weekly Optimization",
+          "Performance Reports"
+        ]
+      },
+      {
+        name: "Pro",
+        price: "₹24,999",
+        features: [
+          "Multi-Platform Advertising",
+          "Advanced Targeting",
+          "Conversion Tracking",
+          "Weekly Optimization",
+          "Dedicated Manager"
+        ]
       }
     ]
   },
+
   {
-    id: "content",
-    label: "Content Writing",
+    id: "business-profile",
+    label: "Business Profile Setup",
     plans: [
       {
-        name: "Blog Pack",
-        price: "$200",
-        features: ["4 Blogs (1000 words)", "SEO Keywords", "Meta Descriptions", "Plagiarism Check"]
+        name: "Basic Setup",
+        price: "₹2,999",
+        features: [
+          "Profile Creation",
+          "Business Information Setup",
+          "Category Optimization",
+          "Verification Support"
+        ]
       },
       {
-        name: "Website Copy",
-        price: "$600",
-        features: ["Home, About, Services", "Tone of Voice Guide", "Sales Psychology", "Competitor Research"]
+        name: "Optimized Profile",
+        price: "₹5,999",
+        features: [
+          "Complete Profile Optimization",
+          "SEO-Friendly Description",
+          "Photo Optimization",
+          "Services Setup",
+          "Review Strategy"
+        ]
+      },
+      {
+        name: "Local Growth",
+        price: "₹9,999",
+        features: [
+          "Advanced Optimization",
+          "Monthly Posts",
+          "Review Management",
+          "Local SEO Setup",
+          "Performance Tracking"
+        ]
       }
     ]
   }
