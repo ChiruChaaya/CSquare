@@ -97,7 +97,7 @@ const ServicesGallery = () => {
           transition={{ duration: 0.8 }}
           className="hidden md:flex w-1/2 items-center justify-center p-12"
         >
-          <div className="relative w-full h-[85%] rounded-xl overflow-hidden shadow-2xl">
+          <div className="relative w-full h-[98%] rounded-xl overflow-hidden shadow-2xl">
             <AnimatePresence mode="wait">
               <motion.img
                 key={services[activeIndex].image}

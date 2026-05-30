@@ -1,10 +1,10 @@
 // 1. Import your local images at the top
-import imgSocial from '../assets/images/socialmedia.jpg';
-import imgWeb from '../assets/images/website.jpg';
-import imgVideo from '../assets/images/videoediting.jpg';
-import imgShoot from '../assets/images/shoot.jpg';
-import imgBrochure from '../assets/images/brochure.jpg';
-import imgContent from '../assets/images/Contentwriting.jpg';
+import imgSocial from '../assets/images/socialmediapic.png';
+import imgWeb from '../assets/images/webdevelopment.png';
+import imgVideo from '../assets/images/videoEditings.png';
+import imgShoot from '../assets/images/adshooting.png';
+import imgAdrunning from '../assets/images/runningads.png';
+import imgProfile from '../assets/images/businessprofile.png';
 
 // 2. Use the variable names in the object
 export const services = [
@@ -38,17 +38,17 @@ export const services = [
   },
   {
     id: 5,
-    title: "Brochure Designing",
-    category: "Print Design",
-    description: "Elegant layouts for brochures, flyers, and physical marketing materials.",
-    image: imgBrochure
+    title: "Running Ads",
+    category: "Performance Marketing",
+    description: "Data-driven advertising campaigns designed to reach the right audience, maximize ROI, and generate consistent leads for your business.",
+    image: imgAdrunning
   },
   {
     id: 6,
-    title: "Content Writing",
-    category: "Copywriting",
-    description: "Engaging narratives and SEO-friendly copy that drives conversions.",
-    image: imgContent
+    title: "Business Profile Setup",
+    category: "Google Business Profile",
+    description: "Complete setup and optimization of your business profile to enhance local search visibility, customer engagement, and online credibility.",
+    image: imgProfile
   }
 ];
 

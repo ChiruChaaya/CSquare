@@ -7,8 +7,8 @@ const servicesList = [
   "Website Creation",
   "Video Editing",
   "Ad & Video Shoot",
-  "Brochure Design",
-  "Content Writing",
+  "Running Ads",
+  "Business Profile Setup",
   "Other"
 ];
 
