@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import SplashScreen from './compenents/splash.jsx'; // Import the file
+import SplashScreen from './compenents/Splash/SplashScreen.jsx';
 import ContactSection from './sections/Contact';
 import PricingSection from './sections/Prices';
 import Hero from './sections/Home';
@@ -9,6 +9,8 @@ import About from './sections/About';
 import ServicesGallery from './sections/Service';
 import ComboPacks from './sections/ComboPacks.jsx';
 import MusicPlayer from "./compenents/MusicPlayer";
+import CustomCursor from './compenents/Cursor/CustomCursor';
+import SmoothScroll from './compenents/SmoothScroll/SmoothScroll';
 
 // Import your other sections
 
@@ -18,11 +20,11 @@ function App() {
 
   return (
     
-    <div className="bg-neutral-950 min-h-screen text-white">
-      <audio id="background-music" loop>
-        <source src="/music/background.mp3" type="audio/mpeg" />
-      </audio>
-      
+    <div className="bg-black min-h-screen text-white">
+<audio id="background-music" loop preload="auto">
+  <source src="/music/atlasaudio-hope-piano-509806.mp3" type="audio/mpeg" />
+</audio>
+        <CustomCursor />
       {/* AnimatePresence allows the Splash to animate OUT when removed */}
       <AnimatePresence mode="wait">
         {isLoading && (
@@ -31,19 +33,21 @@ function App() {
       </AnimatePresence>
 
       {/* ONLY SHOW WEBSITE AFTER LOADING */}
-      {!isLoading && (
-        <main>
-          <MusicPlayer/>
-          <Navbar />
-          <Hero />
-          <About/>
-          <ServicesGallery/>
-          <PricingSection/>
-          <ComboPacks/>
-          <ContactSection/>
-      
-        </main>
-      )}
+      {/* ONLY SHOW WEBSITE AFTER LOADING */}
+{!isLoading && (
+  <SmoothScroll>
+    <main>
+      <MusicPlayer/>
+      <Navbar />
+      <Hero />
+      <About/>
+      <ServicesGallery/>
+      <PricingSection/>
+      <ComboPacks/>
+      <ContactSection/>
+    </main>
+  </SmoothScroll>
+)}
 
     </div>
   );
