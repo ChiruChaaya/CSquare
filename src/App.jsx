@@ -1,56 +1,62 @@
-import React, { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import SplashScreen from './compenents/Splash/SplashScreen.jsx';
-import ContactSection from './sections/Contact';
-import PricingSection from './sections/Prices';
-import Hero from './sections/Home';
-import Navbar from './compenents/Navbar';
-import About from './sections/About';
-import ServicesGallery from './sections/Service';
-import ComboPacks from './sections/ComboPacks.jsx';
-import MusicPlayer from "./compenents/MusicPlayer";
-import CustomCursor from './compenents/Cursor/CustomCursor';
-import SmoothScroll from './compenents/SmoothScroll/SmoothScroll';
+// src/App.jsx
+import { useState } from 'react';
 
-// Import your other sections
+import SplashScreen     from './compenents/Splash/SplashScreen';
+import CustomCursor     from './compenents/Cursor/CustomCursor';
+import SmoothScroll     from './compenents/SmoothScroll/SmoothScroll';
+import GlobalBackground from './compenents/GlobalBackground/GlobalBackground';
+import MorphIconScene   from './compenents/MorphIcon/MorphIconScene';
+import Navbar           from './compenents/Navbar';
+import MusicPlayer      from './compenents/MusicPlayer';
 
-function App() {
-  // State to track if loading is finished
-  const [isLoading, setIsLoading] = useState(true);
+import Home       from './sections/Home';
+import About      from './sections/About';
+import Service    from './sections/Service';
+import Prices     from './sections/Prices';
+import ComboPacks from './sections/ComboPacks';
+import Contact    from './sections/Contact';
+
+export default function App() {
+  const [splashDone, setSplashDone] = useState(false);
 
   return (
-    
-    <div className="bg-black min-h-screen text-white">
-<audio id="background-music" loop preload="auto">
-  <source src="/music/atlasaudio-hope-piano-509806.mp3" type="audio/mpeg" />
-</audio>
-        <CustomCursor />
-      {/* AnimatePresence allows the Splash to animate OUT when removed */}
-      <AnimatePresence mode="wait">
-        {isLoading && (
-          <SplashScreen onComplete={() => setIsLoading(false)} />
+    <>
+      <CustomCursor />
+
+      <SmoothScroll>
+        {!splashDone && (
+          <SplashScreen onComplete={() => setSplashDone(true)} />
         )}
-      </AnimatePresence>
 
-      {/* ONLY SHOW WEBSITE AFTER LOADING */}
-      {/* ONLY SHOW WEBSITE AFTER LOADING */}
-{!isLoading && (
-  <SmoothScroll>
-    <main>
-      <MusicPlayer/>
-      <Navbar />
-      <Hero />
-      <About/>
-      <ServicesGallery/>
-      <PricingSection/>
-      <ComboPacks/>
-      <ContactSection/>
-    </main>
-  </SmoothScroll>
-)}
+        <div
+          style={{
+            opacity: splashDone ? 1 : 0,
+            transition: 'opacity 0.8s ease',
+            position: 'relative',
+            background: '#000000',
+            minHeight: '100vh',
+          }}
+        >
+          {/* z-index 1 — ambient 2500 particles, mouse interaction, scroll parallax */}
+          <GlobalBackground />
 
-    </div>
+          {/* z-index 2 — morphing icon particles per section */}
+          {splashDone && <MorphIconScene />}
+
+          <Navbar />
+          <MusicPlayer />
+
+          {/* z-index 3 — all section content */}
+          <main style={{ position: 'relative', zIndex: 3 }}>
+            <Home />
+            <About />
+            <Service />
+            <Prices />
+            <ComboPacks />
+            <Contact />
+          </main>
+        </div>
+      </SmoothScroll>
+    </>
   );
 }
-
-export default App;

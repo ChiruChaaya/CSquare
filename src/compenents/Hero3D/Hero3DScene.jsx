@@ -1,7 +1,6 @@
 import { Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import HeroParticles from './HeroParticles';
-import AmbientParticles from './AmbientParticles';
 
 export default function Hero3DScene() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -40,9 +39,8 @@ export default function Hero3DScene() {
       }}
     >
       <Suspense fallback={null}>
-        <AmbientParticles count={1500} />
-        <HeroParticles scrollProgress={scrollProgress} />
-      </Suspense>
+  <HeroParticles scrollProgress={scrollProgress} />
+</Suspense>
     </Canvas>
   );
 }

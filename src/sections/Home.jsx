@@ -1,9 +1,9 @@
+// src/sections/Home.jsx
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SplitType from 'split-type';
-import Hero3DScene from '../compenents/Hero3D/Hero3DScene';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,35 +18,25 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Split heading lines into characters
       const lines = [line1Ref, line2Ref, line3Ref, line4Ref];
       const splits = lines.map((ref) =>
         new SplitType(ref.current, { types: 'chars' })
       );
 
-      // Set initial state
       splits.forEach((split) => {
         gsap.set(split.chars, { y: '110%', opacity: 0 });
       });
 
-      // Timeline for hero animations
       const tl = gsap.timeline({ delay: 0.3 });
 
       splits.forEach((split, i) => {
         tl.to(
           split.chars,
-          {
-            y: '0%',
-            opacity: 1,
-            duration: 1,
-            ease: 'power4.out',
-            stagger: 0.02,
-          },
+          { y: '0%', opacity: 1, duration: 1, ease: 'power4.out', stagger: 0.02 },
           i * 0.15
         );
       });
 
-      // Tagline fade in
       tl.fromTo(
         taglineRef.current,
         { y: 30, opacity: 0 },
@@ -54,32 +44,19 @@ export default function Hero() {
         '-=0.5'
       );
 
-      // Buttons scale in
       tl.fromTo(
         buttonsRef.current?.children,
         { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: 'power3.out',
-        },
+        { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out' },
         '-=0.4'
       );
 
-      // Scroll indicator animation
       gsap.to('.scroll-indicator-arrow', {
-        y: 8,
-        repeat: -1,
-        yoyo: true,
-        duration: 1.2,
-        ease: 'power1.inOut',
+        y: 8, repeat: -1, yoyo: true,
+        duration: 1.2, ease: 'power1.inOut',
       });
 
-      return () => {
-        splits.forEach((s) => s.revert());
-      };
+      return () => splits.forEach((s) => s.revert());
     }, sectionRef);
 
     return () => ctx.revert();
@@ -97,49 +74,55 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="home"
-      className="relative min-h-screen w-full overflow-hidden bg-black flex items-center"
-      style={{
-        background: 'linear-gradient(180deg, #000000 0%, #0a1512 100%)',
-      }}
+      className="relative min-h-screen w-full flex items-start pt-24 md:pt-20"
+      style={{ background: 'transparent' }}
     >
-      {/* ─── 3D Particle Scene — Right Side ─── */}
-      {/* ─── 3D Particle Scene — FULL Background ─── */}
-<div className="absolute inset-0 pointer-events-none">
-  <Hero3DScene />
-</div>
-
-{/* ─── Dark overlay for text readability — only left ─── */}
-<div
-  className="absolute inset-0 pointer-events-none"
-  style={{
-    background: `linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.9) 0%,
-      rgba(0, 0, 0, 0.6) 35%,
-      rgba(0, 0, 0, 0) 55%,
-      rgba(0, 0, 0, 0) 100%
-    )`,
-  }}
-/>
-
-      {/* ─── Subtle Grid Overlay ─── */}
+      {/* Dark overlay — only darkens LEFT (text area) */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0.6) 35%,
+            rgba(0, 0, 0, 0) 55%,
+            rgba(0, 0, 0, 0) 100%
+          )`,
+          zIndex: 1,
+        }}
+      />
+
+      {/* Subtle Grid Overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: `
             linear-gradient(rgba(217,232,165,0.5) 1px, transparent 1px),
             linear-gradient(90deg, rgba(217,232,165,0.5) 1px, transparent 1px)
           `,
           backgroundSize: '80px 80px',
+          opacity: 0.03,
+          zIndex: 1,
         }}
       />
 
-      {/* ─── Content Container ─── */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-0">
-        <div className="grid md:grid-cols-2 gap-8 items-center min-h-[80vh]">
-          {/* Left: Massive Text */}
+      {/* Radial vignette */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(
+            ellipse at 30% 50%,
+            transparent 40%,
+            rgba(0, 0, 0, 0.6) 100%
+          )`,
+          zIndex: 1,
+        }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12">
+        <div className="grid md:grid-cols-2 gap-8 items-start">
           <div className="text-left">
-            {/* Section label */}
             <motion.p
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -150,59 +133,44 @@ export default function Hero() {
               — Digital Studio
             </motion.p>
 
-            {/* Massive Heading */}
             <h1 className="font-serif font-bold text-white leading-[0.95] tracking-tight mb-8 md:mb-10">
               <div className="overflow-hidden">
-  <div
-    ref={line1Ref}
-    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
-  >
-    We Build
-  </div>
-</div>
-
+                <div ref={line1Ref} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+                  We Build
+                </div>
+              </div>
               <div className="overflow-hidden">
-  <div
-    ref={line2Ref}
-    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
-    style={{
-      color: '#D9E8A5',
-      textShadow: '0 0 40px rgba(217, 232, 165, 0.3)',
-    }}
-  >
-    Digital
-  </div>
-</div>
-
+                <div
+                  ref={line2Ref}
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+                  style={{
+                    color: '#D9E8A5',
+                    textShadow: '0 0 40px rgba(217, 232, 165, 0.3)',
+                  }}
+                >
+                  Digital
+                </div>
+              </div>
               <div className="overflow-hidden">
-  <div
-    ref={line3Ref}
-    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
-  >
-    Experiences
-  </div>
-</div>
-
-<div className="overflow-hidden">
-  <div
-    ref={line4Ref}
-    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl italic font-light"
-    style={{ color: 'rgba(255,255,255,0.5)' }}
-  >
-    that scale
-  </div>
-</div>
+                <div ref={line3Ref} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+                  Experiences
+                </div>
+              </div>
+              <div className="overflow-hidden">
+                <div
+                  ref={line4Ref}
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl italic font-light"
+                  style={{ color: 'rgba(255,255,255,0.5)' }}
+                >
+                  that scale
+                </div>
+              </div>
             </h1>
 
-            {/* Tagline */}
-            <p
-              ref={taglineRef}
-              className="text-base md:text-lg text-neutral-400 max-w-md mb-10 leading-relaxed"
-            >
+            <p ref={taglineRef} className="text-base md:text-lg text-neutral-400 max-w-md mb-10 leading-relaxed">
               From stunning websites to strategic digital marketing, we help brands stand out and scale online with results that matter.
             </p>
 
-            {/* Buttons */}
             <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4">
               <a
                 href="#contact"
@@ -216,9 +184,7 @@ export default function Hero() {
               >
                 <span className="relative flex items-center gap-2">
                   Get Started
-                  <span className="inline-block transition-transform group-hover:translate-x-1">
-                    →
-                  </span>
+                  <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
                 </span>
               </a>
 
@@ -228,73 +194,40 @@ export default function Hero() {
                 className="group px-8 py-4 rounded-full font-semibold border border-neutral-700 text-white hover:border-[#D9E8A5] transition-colors flex items-center justify-center gap-2"
               >
                 Explore Services
-                <span className="inline-block transition-transform group-hover:translate-x-1">
-                  →
-                </span>
+                <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
               </a>
             </div>
           </div>
 
-          {/* Right: Empty space for particle scene visible */}
           <div className="hidden md:block" />
         </div>
       </div>
 
-      {/* ─── Scroll Indicator ─── */}
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none z-10"
       >
-        <span
-          className="text-[10px] font-mono tracking-[0.3em] uppercase"
-          style={{ color: 'rgba(217, 232, 165, 0.4)' }}
-        >
+        <span className="text-[10px] font-mono tracking-[0.3em] uppercase" style={{ color: 'rgba(217, 232, 165, 0.4)' }}>
           Scroll
         </span>
         <div
           className="scroll-indicator-arrow w-px h-8"
-          style={{
-            background:
-              'linear-gradient(to bottom, rgba(217,232,165,0.4), transparent)',
-          }}
+          style={{ background: 'linear-gradient(to bottom, rgba(217,232,165,0.4), transparent)' }}
         />
       </motion.div>
 
-      {/* ─── Corner Decorations ─── */}
-      <div className="absolute top-4 left-4 md:top-6 md:left-6 w-6 h-6 md:w-8 md:h-8 pointer-events-none">
-        <div
-          className="absolute top-0 left-0 w-full h-px"
-          style={{ backgroundColor: 'rgba(217, 232, 165, 0.3)' }}
-        />
-        <div
-          className="absolute top-0 left-0 h-full w-px"
-          style={{ backgroundColor: 'rgba(217, 232, 165, 0.3)' }}
-        />
+      {/* Corner decorations */}
+      <div className="absolute top-4 left-4 md:top-6 md:left-6 w-6 h-6 md:w-8 md:h-8 pointer-events-none z-10">
+        <div className="absolute top-0 left-0 w-full h-px" style={{ backgroundColor: 'rgba(217, 232, 165, 0.3)' }} />
+        <div className="absolute top-0 left-0 h-full w-px" style={{ backgroundColor: 'rgba(217, 232, 165, 0.3)' }} />
       </div>
-      <div className="absolute top-4 right-4 md:top-6 md:right-6 w-6 h-6 md:w-8 md:h-8 pointer-events-none">
-        <div
-          className="absolute top-0 right-0 w-full h-px"
-          style={{ backgroundColor: 'rgba(217, 232, 165, 0.3)' }}
-        />
-        <div
-          className="absolute top-0 right-0 h-full w-px"
-          style={{ backgroundColor: 'rgba(217, 232, 165, 0.3)' }}
-        />
+      <div className="absolute top-4 right-4 md:top-6 md:right-6 w-6 h-6 md:w-8 md:h-8 pointer-events-none z-10">
+        <div className="absolute top-0 right-0 w-full h-px" style={{ backgroundColor: 'rgba(217, 232, 165, 0.3)' }} />
+        <div className="absolute top-0 right-0 h-full w-px" style={{ backgroundColor: 'rgba(217, 232, 165, 0.3)' }} />
       </div>
-
-      {/* ─── Radial vignette ─── */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `radial-gradient(
-            ellipse at 30% 50%,
-            transparent 40%,
-            rgba(0, 0, 0, 0.6) 100%
-          )`,
-        }}
-      />
     </section>
   );
 }

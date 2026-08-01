@@ -104,7 +104,7 @@ const vertexShader = /* glsl */ `
     
     gl_PointSize = aSize * uPixelRatio * (150.0 / -finalPos.z);
     
-    vAlpha = mix(0.4, 0.95, uProgress);
+    vAlpha = mix(0.4, 0.8, uProgress);
   }
 `;
 
@@ -112,71 +112,89 @@ const fragmentShader = /* glsl */ `
   varying vec3 vColor;
   varying float vAlpha;
 
-  void main() {
-    vec2 uv = gl_PointCoord - vec2(0.5);
-    float dist = length(uv);
-    if (dist > 0.5) discard;
-    float alpha = 1.0 - smoothstep(0.3, 0.5, dist);
-    gl_FragColor = vec4(vColor, alpha * vAlpha);
-  }
+void main() {
+  vec2 uv = gl_PointCoord - vec2(0.5);
+  float dist = length(uv);
+  if (dist > 0.5) discard;
+  float alpha = 1.0 - smoothstep(0.35, 0.5, dist);
+  gl_FragColor = vec4(vColor, alpha * vAlpha * 0.75);
+}
 `;
 
 // Load SVG and extract points
-async function loadSVGPoints(svgUrl, pointCount) {
-  const response = await fetch(svgUrl);
-  const svgText = await response.text();
+// Load image and extract particles from black pixels
+async function loadImagePoints(imageUrl, pointCount) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
 
-  // Extract viewBox to auto-scale
-  const viewBoxMatch = svgText.match(/viewBox="([^"]+)"/);
-  const [vbX, vbY, vbW, vbH] = viewBoxMatch
-    ? viewBoxMatch[1].split(/\s+/).map(Number)
-    : [0, 0, 240, 240];
+    img.onload = () => {
+      // Create canvas to read pixels
+      const canvas = document.createElement('canvas');
+      const size = 200; // Sample resolution
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
 
-  // Find LAST path (the filled one for sampling)
-  const allPaths = [...svgText.matchAll(/<path[^>]*d="([^"]+)"/g)];
-  if (allPaths.length === 0) return [];
+      // Draw image scaled to canvas
+      ctx.drawImage(img, 0, 0, size, size);
+      const imageData = ctx.getImageData(0, 0, size, size);
+      const pixels = imageData.data;
 
-  // Use last path (should be the fill path)
-  const pathD = allPaths[allPaths.length - 1][1];
+      // Find all dark (icon) pixels
+      const darkPixels = [];
+      for (let y = 0; y < size; y++) {
+        for (let x = 0; x < size; x++) {
+          const idx = (y * size + x) * 4;
+          const r = pixels[idx];
+          const g = pixels[idx + 1];
+          const b = pixels[idx + 2];
+          const a = pixels[idx + 3];
 
-  const svgNS = 'http://www.w3.org/2000/svg';
-  const svg = document.createElementNS(svgNS, 'svg');
-  svg.setAttribute('viewBox', `${vbX} ${vbY} ${vbW} ${vbH}`);
-  svg.style.position = 'absolute';
-  svg.style.opacity = '0';
-  svg.style.pointerEvents = 'none';
-  svg.style.width = '1px';
-  svg.style.height = '1px';
+          // Detect dark pixels (icon lines)
+          const brightness = (r + g + b) / 3;
+          if (a > 100 && brightness < 100) {
+            darkPixels.push({ x, y });
+          }
+        }
+      }
 
-  const path = document.createElementNS(svgNS, 'path');
-  path.setAttribute('d', pathD);
-  svg.appendChild(path);
-  document.body.appendChild(svg);
+      console.log(`Found ${darkPixels.length} icon pixels`);
 
-  const points = [];
-  let attempts = 0;
-  const maxAttempts = pointCount * 30;
-  const centerX = vbX + vbW / 2;
-  const centerY = vbY + vbH / 2;
-  const scale = Math.max(vbW, vbH) / 6; // Adaptive scaling
+      if (darkPixels.length === 0) {
+        console.error('No dark pixels found! Check image.');
+        resolve([]);
+        return;
+      }
 
-  while (points.length < pointCount && attempts < maxAttempts) {
-    const pt = svg.createSVGPoint();
-    pt.x = vbX + Math.random() * vbW;
-    pt.y = vbY + Math.random() * vbH;
+      // Sample particles from dark pixels
+      const points = [];
+      for (let i = 0; i < pointCount; i++) {
+        const pixel = darkPixels[Math.floor(Math.random() * darkPixels.length)];
 
-    if (path.isPointInFill(pt)) {
-      const x = (pt.x - centerX) / scale;
-      const y = -(pt.y - centerY) / scale;
-      const z = (Math.random() - 0.5) * 1;
-      points.push({ x, y, z });
-    }
-    attempts++;
-  }
+        // Convert to 3D coordinates (centered, scaled)
+        const x = (pixel.x - size / 2) / 20;
+        const y = -(pixel.y - size / 2) / 20;
+        const z = (Math.random() - 0.5) * 0.5;
 
-  document.body.removeChild(svg);
-  console.log(`Generated ${points.length} particles from SVG`);
-  return points;
+        // Add tiny jitter for organic feel
+        points.push({
+          x: x + (Math.random() - 0.5) * 0.1,
+          y: y + (Math.random() - 0.5) * 0.1,
+          z,
+        });
+      }
+
+      resolve(points);
+    };
+
+    img.onerror = () => {
+      console.error('Failed to load image:', imageUrl);
+      resolve([]);
+    };
+
+    img.src = imageUrl;
+  });
 }
 
 export default function HeroParticles({ scrollProgress = 0 }) {
@@ -202,9 +220,9 @@ export default function HeroParticles({ scrollProgress = 0 }) {
     []
   );
 
-  useEffect(() => {
-    loadSVGPoints('/hero-puzzle.svg', particleCount).then(setSvgPoints);
-  }, []);
+ useEffect(() => {
+  loadImagePoints('/hero-icon.jpg', particleCount).then(setSvgPoints);
+}, []);
 
   const { geometry, uniforms, material } = useMemo(() => {
     if (!svgPoints || svgPoints.length === 0) {
@@ -241,10 +259,10 @@ export default function HeroParticles({ scrollProgress = 0 }) {
       positions[i3 + 1] = randoms[i3 + 1];
       positions[i3 + 2] = randoms[i3 + 2];
 
-      sizes[i] =
-        Math.random() < 0.9
-          ? 0.3 + Math.random() * 0.4
-          : 0.6 + Math.random() * 0.4;
+sizes[i] =
+  Math.random() < 0.9
+    ? 0.2 + Math.random() * 0.3   // Very small (90%)
+    : 0.4 + Math.random() * 0.3;  // Small (10%)
 
       speeds[i] = 0.5 + Math.random() * 0.8;
       offsets[i] = Math.random() * Math.PI * 2;
@@ -284,14 +302,14 @@ export default function HeroParticles({ scrollProgress = 0 }) {
     return { geometry: geo, uniforms: uniformsObj, material: mat };
   }, [palette, svgPoints]);
 
-  useEffect(() => {
-    const handleMove = (e) => {
-      mouse.current.x = e.clientX / window.innerWidth;
-      mouse.current.y = 1 - e.clientY / window.innerHeight;
-    };
-    window.addEventListener('mousemove', handleMove);
-    return () => window.removeEventListener('mousemove', handleMove);
-  }, []);
+useEffect(() => {
+  const handleMove = (e) => {
+    mouse.current.x = e.clientX / window.innerWidth;
+    mouse.current.y = 1 - e.clientY / window.innerHeight;
+  };
+  window.addEventListener('mousemove', handleMove);
+  return () => window.removeEventListener('mousemove', handleMove);
+}, []);
 
   useFrame((state, delta) => {
     if (!uniforms) return;
@@ -326,12 +344,13 @@ export default function HeroParticles({ scrollProgress = 0 }) {
 
   if (!geometry || !material) return null;
 
-  return (
-    <points
-      ref={pointsRef}
-      geometry={geometry}
-      material={material}
-      position={[4, 0, 0]}
-    />
-  );
+return (
+  <points
+    ref={pointsRef}
+    geometry={geometry}
+    material={material}
+    position={[5, 0, 0]}
+    scale={[0.9, 0.9, 0.9]}
+  />
+);
 }

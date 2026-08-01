@@ -1,223 +1,410 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import puzzle from "../assets/images/puzzle.png";
-import { combinationPacks } from '../Data/combinationPacks.js';
+// src/sections/ComboPacks.jsx
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import SplitType from 'split-type';
 
-// --- ANIMATION VARIANTS ---
-const sectionVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2, when: "beforeChildren" }
-  }
-};
+gsap.registerPlugin(ScrollTrigger);
 
-const fadeUpVariants = {
-  hidden: { y: 30, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } }
-};
+const COMBOS = [
+  {
+    id: 'c1',
+    name: 'Launch Pad',
+    tagline: 'Web + Brand',
+    discount: 20,
+    originalPrice: 55000,
+    bundlePrice: 44000,
+    color: '#D9E8A5',
+    includes: [
+      'Custom Website',
+      'Brand Identity',
+      'Logo + Palette',
+      'Social kit',
+      '60-day support',
+    ],
+  },
+  {
+    id: 'c2',
+    name: 'Growth Engine',
+    tagline: 'Web + AI + CRM',
+    discount: 25,
+    originalPrice: 120000,
+    bundlePrice: 90000,
+    badge: 'Best Value',
+    color: '#A5D9C0',
+    includes: [
+      'React app',
+      'AI Automation',
+      'CSquare360 CRM',
+      'Analytics dashboard',
+      'Bots',
+      '90-day support',
+    ],
+  },
+  {
+    id: 'c3',
+    name: 'Full Stack',
+    tagline: 'Web + Security + Marketing',
+    discount: 30,
+    originalPrice: 150000,
+    bundlePrice: 105000,
+    color: '#B5D080',
+    includes: [
+      'Enterprise app',
+      'Security audit',
+      'SEO + SEM',
+      'Social strategy',
+      'Dashboard',
+      '120-day support',
+    ],
+  },
+  {
+    id: 'c4',
+    name: 'Total Dominance',
+    tagline: 'All 6 Services',
+    discount: 35,
+    originalPrice: 250000,
+    bundlePrice: 162500,
+    badge: '🔥 Flagship',
+    color: '#D9E8A5',
+    includes: [
+      'AI + CRM + Web + Security',
+      'Marketing suite',
+      'Brand design',
+      'Project manager',
+      '12-month retainer',
+    ],
+  },
+];
 
-const cardStaggerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
-};
+// ─── Combo Card ──────────────────────────────────────────────────────────
+function ComboCard({ combo, index }) {
+  const ref = useRef(null);
 
-const cardItemVariants = {
-  hidden: { y: 50, opacity: 0, scale: 0.9 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    scale: 1,
-    transition: { type: "spring", stiffness: 60, damping: 15 }
-  }
-};
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    gsap.set(el, { y: 70, opacity: 0 });
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 87%',
+      once: true,
+      onEnter: () =>
+        gsap.to(el, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          delay: (index % 2) * 0.15,
+          ease: 'power4.out',
+        }),
+    });
+  }, [index]);
 
-const ComboPacks = () => {
+  const savings = combo.originalPrice - combo.bundlePrice;
+  const isBig = !!combo.badge;
+
   return (
-    <>
-      <section
-        id="combo-packs"
-        className="relative w-full py-20 overflow-x-hidden min-h-screen flex flex-col justify-center"
-      >
-        {/* Background */}
-        <div className="absolute inset-0 bg-[#183A3B] pointer-events-none" />
+    <div
+      ref={ref}
+      className="group relative rounded-2xl flex flex-col transition-all duration-500 hover:-translate-y-1"
+      style={{
+        border: isBig
+          ? `1px solid ${combo.color}55`
+          : '1px solid rgba(255,255,255,0.1)',
+        // Solid dark background so text stays readable
+        background: isBig
+          ? 'linear-gradient(180deg, rgba(20,30,20,0.95), rgba(10,15,10,0.98))'
+          : 'linear-gradient(180deg, rgba(15,15,15,0.94), rgba(5,5,5,0.97))',
+        backdropFilter: 'blur(16px)',
+        padding: '2.25rem',
+        boxShadow: isBig
+          ? `0 25px 70px ${combo.color}15, 0 0 0 1px ${combo.color}20 inset`
+          : '0 15px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.02) inset',
+      }}
+      data-cursor="view"
+    >
+      {/* Hover glow */}
+      <div
+        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle at 40% 0%, ${combo.color}20, transparent 65%)`,
+        }}
+      />
 
-        {/* Decorative glow elements */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
-
-        <motion.div
-          variants={sectionVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ amount: 0.2 }}
-          className="relative z-10 w-full max-w-[1400px] mx-auto px-4 md:px-10"
-        >
-
-          {/* Header */}
-          <motion.div variants={fadeUpVariants} className="text-center mb-16">
-            <span className="text-emerald-400 font-mono text-xs tracking-widest uppercase">
-              Bundled & Discounted
-            </span>
-            <h2 className="text-4xl sm:text-5xl font-bold font-serif text-white mt-3">
-              Combination Packs
-            </h2>
-            <p className="text-neutral-400 mt-4 max-w-2xl mx-auto text-base sm:text-lg">
-              Get more value with our curated service bundles — designed to give you everything you need at the best possible price.
-            </p>
-          </motion.div>
-
-          {/* Cards Grid */}
-          <motion.div
-            variants={cardStaggerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+      {/* Badge */}
+      {combo.badge && (
+        <div className="absolute -top-3.5 left-6 z-10">
+          <span
+            className="text-[10px] font-mono tracking-[0.2em] uppercase px-3 py-1.5 rounded-full"
+            style={{
+              background: combo.color,
+              color: '#000',
+              boxShadow: `0 8px 24px ${combo.color}30`,
+            }}
           >
-            {combinationPacks.map((pack) => (
-              <motion.div
-                key={pack.id}
-                variants={cardItemVariants}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                className={`relative flex flex-col p-6 sm:p-8 rounded-2xl backdrop-blur-md transition-all duration-300 ${
-                  pack.badge
-                    ? 'bg-gradient-to-b from-emerald-900/40 to-neutral-900/60 border-2 border-emerald-500/50 shadow-2xl shadow-emerald-500/20'
-                    : 'bg-neutral-900/60 border border-white/10 hover:border-emerald-500/50'
-                }`}
-              >
-                {/* Badge */}
-                {pack.badge && (
-                  <motion.div
-                    initial={{ scale: 0, rotate: -10 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-500 text-white text-xs font-mono font-bold px-4 py-1 rounded-full tracking-widest shadow-lg"
-                  >
-                    {pack.badge}
-                  </motion.div>
-                )}
+            {combo.badge}
+          </span>
+        </div>
+      )}
 
-                {/* Pack Header */}
-                <div className="mb-6">
-                  <h3 className="text-2xl font-serif font-bold text-white mb-1">
-                    {pack.name}
-                  </h3>
-                  <p className="text-emerald-400 font-mono text-xs uppercase tracking-wider">
-                    {pack.tagline}
-                  </p>
-                </div>
-
-                {/* Pricing */}
-                <div className="mb-6">
-                  <div className="flex items-baseline gap-3 mb-2">
-                    <span className="text-4xl sm:text-5xl font-bold text-white">
-                      {pack.discountedPrice}
-                    </span>
-                    <span className="text-neutral-500 line-through text-lg">
-                      {pack.originalPrice}
-                    </span>
-                  </div>
-                  <span className="inline-block bg-emerald-500/20 text-emerald-400 text-xs font-mono font-bold px-3 py-1 rounded-full">
-                    {pack.savings}
-                  </span>
-                </div>
-
-                {/* Divider */}
-                <div className="w-full h-px bg-white/10 mb-6" />
-
-                {/* Services List */}
-                <div className="flex-1 mb-6">
-                  <p className="text-neutral-400 text-xs font-mono uppercase tracking-wider mb-4">
-                    What's Included:
-                  </p>
-                  <ul className="space-y-3">
-                    {pack.services.map((service, i) => (
-                      <motion.li
-                        key={i}
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.05 }}
-                        className="flex items-start gap-3 text-neutral-300 text-sm"
-                      >
-                        <svg
-                          className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                        {service}
-                      </motion.li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Best For Tag */}
-                <div className="mb-6 p-3 rounded-lg bg-white/5 border border-white/10">
-                  <p className="text-xs font-mono text-neutral-400 uppercase tracking-wider mb-1">
-                    Best For:
-                  </p>
-                  <p className="text-sm text-white font-medium">
-                    {pack.bestFor}
-                  </p>
-                </div>
-
-                {/* CTA Button */}
-                <motion.a
-                  href="#contact"
-                  whileTap={{ scale: 0.97 }}
-                  className={`w-full py-3 rounded-lg font-medium transition-all duration-300 text-center block cursor-pointer ${
-                  pack.badge
-                    ? "bg-emerald-500 text-white hover:bg-emerald-400 shadow-lg shadow-emerald-500/30"
-                    : "bg-white/5 border border-white/10 text-white hover:bg-emerald-600 hover:border-emerald-600"
-                }`}
-              >
-                Get This Pack
-              </motion.a>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Bottom Call to Action */}
-          <motion.div
-            variants={fadeUpVariants}
-            className="text-center mt-16"
-          >
-            <p className="text-neutral-400 mb-4">
-              Need a custom combination? We'll build a pack just for you.
-            </p>
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block px-8 py-3 rounded-xl border-2 border-emerald-500 text-emerald-400 font-semibold hover:bg-emerald-500 hover:text-white transition-all duration-300"
+      <div className="relative flex flex-col flex-1">
+        {/* Header row */}
+        <div className="flex items-start justify-between mb-6">
+          <div>
+            <p
+              className="text-xs font-mono tracking-[0.25em] uppercase mb-1"
+              style={{ color: combo.color }}
             >
-              Request Custom Pack
-            </motion.a>
-          </motion.div>
+              {combo.name}
+            </p>
+            <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+              {combo.tagline}
+            </p>
+          </div>
+          <div
+            className="flex-shrink-0 text-xs font-mono font-bold px-3 py-1.5 rounded-full"
+            style={{
+              background: `${combo.color}25`,
+              color: combo.color,
+              border: `1px solid ${combo.color}40`,
+            }}
+          >
+            Save {combo.discount}%
+          </div>
+        </div>
 
-        </motion.div>
-      </section>
+        {/* Price */}
+        <div className="mb-1">
+          <span
+            className="text-4xl md:text-5xl font-serif font-bold"
+            style={{
+              color: combo.color,
+              textShadow: `0 0 40px ${combo.color}40`,
+            }}
+          >
+            ₹{combo.bundlePrice.toLocaleString('en-IN')}
+          </span>
+        </div>
+        <p
+          className="text-xs font-mono mb-2"
+          style={{ color: 'rgba(255,255,255,0.4)' }}
+        >
+          <span
+            className="line-through mr-2"
+            style={{ color: 'rgba(255,255,255,0.3)' }}
+          >
+            ₹{combo.originalPrice.toLocaleString('en-IN')}
+          </span>
+          You save ₹{savings.toLocaleString('en-IN')}
+        </p>
 
-      {/* Bottom puzzle row – matching your Pricing section */}
-      <section className="bg-[#183A3B] flex gap-2 sm:gap-4 mx-auto justify-center py-6">
-        {[1, 2, 3].map((i) => (
-          <motion.img
-            key={i}
-            whileHover={{ y: -10 }}
-            src={puzzle}
-            alt="Decoration"
-            className="h-12 sm:h-16 md:h-20 rounded-xl"
-          />
-        ))}
-      </section>
-    </>
+        {/* Divider */}
+        <div
+          className="w-full h-px my-6"
+          style={{ background: 'rgba(255,255,255,0.08)' }}
+        />
+
+        {/* Includes */}
+        <ul className="flex flex-col gap-2.5 flex-1 mb-8">
+          {combo.includes.map((item) => (
+            <li
+              key={item}
+              className="flex items-start gap-3 text-sm"
+              style={{ color: 'rgba(255,255,255,0.75)' }}
+            >
+              <span
+                className="text-xs mt-1"
+                style={{ color: combo.color, flexShrink: 0 }}
+              >
+                ✓
+              </span>
+              {item}
+            </li>
+          ))}
+        </ul>
+
+        {/* CTA */}
+        <a
+          href="#contact"
+          className="block text-center text-sm font-mono tracking-widest uppercase py-4 rounded-xl border transition-all duration-300 hover:-translate-y-0.5 group/btn"
+          style={{
+            borderColor: `${combo.color}50`,
+            color: combo.color,
+            background: `${combo.color}08`,
+          }}
+          onClick={(e) => {
+            e.preventDefault();
+            window.lenis?.scrollTo(document.querySelector('#contact'), {
+              offset: -80,
+              duration: 1.5,
+            });
+          }}
+        >
+          <span className="inline-flex items-center gap-2">
+            Claim Bundle
+            <span className="transition-transform duration-300 group-hover/btn:translate-x-1">
+              →
+            </span>
+          </span>
+        </a>
+      </div>
+    </div>
   );
-};
+}
 
-export default ComboPacks;
+// ─── Main Combos Section ─────────────────────────────────────────────────
+export default function ComboPacks() {
+  const sectionRef = useRef(null);
+  const headingRef = useRef(null);
+  const labelRef = useRef(null);
+  const dividerRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.set(labelRef.current, { y: 20, opacity: 0 });
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: 'top 75%',
+        once: true,
+        onEnter: () =>
+          gsap.to(labelRef.current, {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: 'power3.out',
+          }),
+      });
+
+      const split = new SplitType(headingRef.current, { types: 'chars' });
+      gsap.set(split.chars, { y: '110%', opacity: 0 });
+      ScrollTrigger.create({
+        trigger: headingRef.current,
+        start: 'top 72%',
+        once: true,
+        onEnter: () =>
+          gsap.to(split.chars, {
+            y: '0%',
+            opacity: 1,
+            duration: 1.1,
+            stagger: 0.022,
+            ease: 'power4.out',
+          }),
+      });
+
+      gsap.set(dividerRef.current, {
+        scaleX: 0,
+        transformOrigin: 'left center',
+      });
+      ScrollTrigger.create({
+        trigger: dividerRef.current,
+        start: 'top 82%',
+        once: true,
+        onEnter: () =>
+          gsap.to(dividerRef.current, {
+            scaleX: 1,
+            duration: 1.2,
+            delay: 0.3,
+            ease: 'power4.inOut',
+          }),
+      });
+
+      return () => split.revert();
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      id="combos"
+      className="relative w-full min-h-screen py-24 md:py-36 flex items-center"
+      style={{ background: 'transparent' }}
+    >
+      {/* Vignette — darkens center where cards sit */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(
+            ellipse at 50% 55%,
+            rgba(0,0,0,0.75) 0%,
+            rgba(0,0,0,0.4) 45%,
+            transparent 85%
+          )`,
+        }}
+      />
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12">
+        {/* Label */}
+        <p
+          ref={labelRef}
+          className="text-xs font-mono tracking-[0.3em] uppercase mb-8"
+          style={{ color: 'rgba(217,232,165,0.6)' }}
+        >
+          — Bundle & Save
+        </p>
+
+        {/* Heading */}
+        <div className="mb-10 max-w-3xl">
+          <h2
+            ref={headingRef}
+            className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white leading-[1.05]"
+          >
+            More power,{' '}
+            <span
+              style={{
+                color: '#D9E8A5',
+                textShadow: '0 0 40px rgba(217, 232, 165, 0.4)',
+              }}
+            >
+              less spend.
+            </span>
+          </h2>
+        </div>
+
+        {/* Divider */}
+        <div
+          ref={dividerRef}
+          className="w-full h-px mb-14"
+          style={{ background: 'rgba(255,255,255,0.08)' }}
+        />
+
+        {/* Cards grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
+          {COMBOS.map((c, i) => (
+            <ComboCard key={c.id} combo={c} index={i} />
+          ))}
+        </div>
+
+        <p
+          className="text-center text-xs font-mono tracking-widest mt-12"
+          style={{ color: 'rgba(255,255,255,0.4)' }}
+        >
+          Save up to 35% when bundling services together.
+        </p>
+      </div>
+
+      {/* Corner decorations */}
+      <div className="absolute top-4 left-4 md:top-6 md:left-6 w-6 h-6 md:w-8 md:h-8 pointer-events-none">
+        <div
+          className="absolute top-0 left-0 w-full h-px"
+          style={{ backgroundColor: 'rgba(217, 232, 165, 0.3)' }}
+        />
+        <div
+          className="absolute top-0 left-0 h-full w-px"
+          style={{ backgroundColor: 'rgba(217, 232, 165, 0.3)' }}
+        />
+      </div>
+      <div className="absolute top-4 right-4 md:top-6 md:right-6 w-6 h-6 md:w-8 md:h-8 pointer-events-none">
+        <div
+          className="absolute top-0 right-0 w-full h-px"
+          style={{ backgroundColor: 'rgba(217, 232, 165, 0.3)' }}
+        />
+        <div
+          className="absolute top-0 right-0 h-full w-px"
+          style={{ backgroundColor: 'rgba(217, 232, 165, 0.3)' }}
+        />
+      </div>
+    </section>
+  );
+}

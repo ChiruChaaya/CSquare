@@ -19,6 +19,20 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
+/* src/index.css — add at top */
+html, body, #root {
+  background: #000000 !important;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Prevent any color flash */
+html {
+  background-color: #000000;
+}
+
 @import "tailwindcss";
 
 @layer base {
